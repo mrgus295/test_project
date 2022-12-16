@@ -1193,26 +1193,59 @@ public class Solution{
 //    }
 	
 	
+//	public String solution(String s) {
+//		String answer = "";
+//        System.out.println(Arrays.toString(s.split(" ")));
+//		for(int j=0; j <s.split(" ").length; j++) {
+//        	String str = s.split(" ")[j];
+//        	if("".equals(str)) {
+//        		answer += " ";
+//        	}else{
+//        		char[] arr = str.toCharArray();
+//            	for(int i=0; i<arr.length; i++) {
+//        			arr[i] = i%2 == 0 ? String.valueOf(arr[i]).toUpperCase().charAt(0): String.valueOf(arr[i]).toLowerCase().charAt(0);
+//        			System.out.println(arr[i]);
+//                }
+//            	str = String.valueOf(arr)+"";
+//            	answer += str;
+//        	}
+//        	System.out.println(str);
+//        }
+//        
+//        answer = answer.trim();
+//        return answer;
+//    }
+	
+//	JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다. 단, 첫 문자가 알파벳이 아닐 때에는 이어지는 알파벳은 소문자로 쓰면 됩니다. (첫 번째 입출력 예 참고)
+//	문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요.
+//	s						return
+//	"3people unFollowed me"	"3people Unfollowed Me"
+//	"for the last week"		"For The Last Week"
+	
 	public String solution(String s) {
+//		String[] arr = s.split(" ");
+//		System.out.println();
+//		System.out.println(Arrays.toString(arr));
+//		String answer = "";
+//		for(int i=0; i<arr.length; i++) {
+//			arr[i] = arr[i].toLowerCase();
+//			 answer += String.valueOf(arr[i].charAt(0)).toUpperCase()+arr[i].substring(1, arr[i].length());
+//			 if(i < arr.length-1)
+//				 answer += " ";
+//		}
 		String answer = "";
-        System.out.println(Arrays.toString(s.split(" ")));
-		for(int j=0; j <s.split(" ").length; j++) {
-        	String str = s.split(" ")[j];
-        	if("".equals(str)) {
-        		answer += " ";
-        	}else{
-        		char[] arr = str.toCharArray();
-            	for(int i=0; i<arr.length; i++) {
-        			arr[i] = i%2 == 0 ? String.valueOf(arr[i]).toUpperCase().charAt(0): String.valueOf(arr[i]).toLowerCase().charAt(0);
-        			System.out.println(arr[i]);
-                }
-            	str = String.valueOf(arr)+"";
-            	answer += str;
-        	}
-        	System.out.println(str);
-        }
-        
-        answer = answer.trim();
+		char[] arr = s.toCharArray();
+		int idx = 0;
+		for(int i=0; i<arr.length; i++) {
+			System.out.println(arr[i]);
+			idx = " ".equals(String.valueOf(arr[i])) ? i+1: idx;
+			if(idx == i)
+				answer += String.valueOf(arr[i]).toUpperCase();
+			else
+				answer += String.valueOf(arr[i]).toLowerCase();
+		}
+		
+		
         return answer;
     }
 	
@@ -1236,7 +1269,7 @@ public class Solution{
 //		같은 숫자는 싫어(미완료)
 		int[] arr = {1,1,3,3,0,1,1};
 		
-		String s = "  tRy hello  WORLD    ";
+		String s = 	"a aa ";
 		
 		Solution solution = new Solution();
 		System.out.println(solution.solution(s));
