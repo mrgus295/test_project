@@ -1197,29 +1197,6 @@ public class Solution{
 //    }
 	
 	
-//	public String solution(String s) {
-//		String answer = "";
-//        System.out.println(Arrays.toString(s.split(" ")));
-//		for(int j=0; j <s.split(" ").length; j++) {
-//        	String str = s.split(" ")[j];
-//        	if("".equals(str)) {
-//        		answer += " ";
-//        	}else{
-//        		char[] arr = str.toCharArray();
-//            	for(int i=0; i<arr.length; i++) {
-//        			arr[i] = i%2 == 0 ? String.valueOf(arr[i]).toUpperCase().charAt(0): String.valueOf(arr[i]).toLowerCase().charAt(0);
-//        			System.out.println(arr[i]);
-//                }
-//            	str = String.valueOf(arr)+"";
-//            	answer += str;
-//        	}
-//        	System.out.println(str);
-//        }
-//        
-//        answer = answer.trim();
-//        return answer;
-//    }
-	
 //	JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다. 단, 첫 문자가 알파벳이 아닐 때에는 이어지는 알파벳은 소문자로 쓰면 됩니다. (첫 번째 입출력 예 참고)
 //	문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요.
 //	s						return
@@ -1265,24 +1242,25 @@ public class Solution{
 //        return answer;
 //    }
 	
-	boolean solution(String s) {
-
-		int a = 0;
-		int b = 0;
-        
-		char[] arr = s.toCharArray();
-        int i = 0;
-        for(char c : arr) {
-        	if(c == '(') {
-        		i+=1;
-        	}else {
-        		i-=1;
-        	}
-        }
-		
-        boolean answer = 0 == 0 ? true : false; 
-        return answer;
-    }
+//	boolean solution(String s) {
+//
+//		int a = 0;
+//		int b = 0;
+//        
+//		char[] arr = s.toCharArray();
+//        int i = 0;
+//        for(char c : arr) {
+//        	if(c == '(') {
+//        		i+=1;
+//        	}else {
+//        		i-=1;
+//        	}
+//        }
+//		
+//        boolean answer = 0 == 0 ? true : false; 
+//        return answer;
+//    }
+	
 //	직사각형 별찍기
 //	public static void main(String[] args) {
 //		Scanner sc = new Scanner(System.in);
@@ -1334,83 +1312,183 @@ public class Solution{
 //        return answer;
 //    }
 	
-//	문자열 한글 철자 추출
-//	한글(유니코드) =>(초성*21+중성)*28+종성+0xAC00
-//	초성(유니코드) =>((문자유니코드 - 0xAC00)/28)/21
-//	중성(유니코드) =>(문자유니코드- 0xAC00)/28 % 21
-//	종성(유니코드) =>(문자유니코드 -0xAC00)%28
-//	public void StringCheck() {
-//		Scanner sc = new Scanner(System.in);
-//		String s = sc.next();
-//		System.out.println(s);
-//		int count = 0;
-//		StringBuffer sb = new StringBuffer();
-//		System.out.println(sb.toString());
-//	
-//		for(char c : s.toCharArray()) {
-//			char unival = c;
-//			String[] start = {"ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
-//			String[] mid = {"ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"};
-//			String[] end = {"","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
-//			System.out.println(count+"글자:\t"+unival);
-//			System.out.println("초성:\t"+start[((int)(char)(unival-0xAC00)/28/21)]+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28/21));
-//			System.out.println("중성:\t"+mid[(int)(char)((unival-0xAC00)/28 % 21)]+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28 % 21));
-//			System.out.println("종성:\t"+end[(int)(char)((unival-0xAC00)%28)]+"\t 유니코드:\t"+(int)(char)(unival-0xAC00)%28);
-//			count+=1;
-//		}	
-//	}
+
 	
-	public static void main(String[] args) {
-		
-		String s = 	"a aa ";
-		
-		int[] a = {1, 4, 2};
-		int[] b = {5, 4, 4};	
-		
-		Solution solution = new Solution();
-//		System.out.println(solution.solution("(())()"));
-//		System.out.println(Arrays.toString(solution.solution(arr)));
-//		System.out.println("잘동작");
-		
-//		solution.StringCheck();
-		
-	}
-
-
+//	이상한 문자열 만들기
+//	public String solution(String s) {
+//		String answer = "";
+//        String[] strArr =s.split(" ",-1);
+//        System.out.println(Arrays.toString(strArr));
+//		for(int j=0; j <strArr.length; j++) {
+//        	String str = strArr[j];
+//    		char[] arr = str.toCharArray();
+//        	for(int i=0; i<arr.length; i++) {
+//    			arr[i] = i%2 == 0 ? String.valueOf(arr[i]).toUpperCase().charAt(0): String.valueOf(arr[i]).toLowerCase().charAt(0);
+//            }
+//        	strArr[j] = String.valueOf(arr);
+//        }
+//		for(int i=0; i<strArr.length; i++) {
+//			answer = i < strArr.length-1 ? answer+strArr[i]+" ":answer+strArr[i];
+//		}
+//        return answer;
+//    }
 	
 	
 //	최대 공약수 , 최소 공배수
 //	n	m	return
 //	3	12	[3, 12]
 //	2	5	[1, 10]
-	public int[] solution(int n, int m) {
-        int[] answer = new int[2];
-		int min = n > m ? m : n;
-		int max = n > m ? n : m;
-		int length = max%min == 0 ? max : max * min ;
-		
-		// 최대 공약수
-		for(int i=max; i>0; i--) {
-			if(min%i == 0 && max%i ==0) {
-				System.out.println("공약수:\t"+i);
-				answer[0] = i;
-				break;
-			}
-		}
-		// 최소 공배수
-		for(int i=1; i<=min*max; i++) {
-			
-//			if(min*i == max || min*i == max) {
-//				System.out.println("공배수:\t"+min*i);
-//				answer[1] = min*i;
+//	최소 공배수 = 최대공약수*(n/최대공약수)*(m/최대공약수) 
+//	public int[] solution(int n, int m) {
+//        int[] answer = new int[2];
+//		int min = n > m ? m : n;
+//		int max = n > m ? n : m;
+//		int length = max%min == 0 ? max : max * min ;
+//		
+//		// 최대 공약수
+//		for(int i=max; i>0; i--) {
+//			if(min%i == 0 && max%i ==0) {
+//				answer[0] = i;
 //				break;
 //			}
-		}
-		System.out.println(Arrays.toString(answer));
+//		}
+//		answer[1] = answer[0]*(min/answer[0])*(max/answer[0]);
+//        return answer;
+//    }
+	
+	// 3진법 뒤집기
+//	public int solution(int n) {
+//        char[] c = Integer.toString(n,3).toCharArray();
+//        String s = "";
+//        for(int i=c.length-1; i>=0; i--) {
+//        	s +=String.valueOf(c[i]);
+//        }
+//        int answer = Integer.parseInt(s,3);
+//        return answer;
+//    }
+	
+//	예산
+//	d			budget	result
+//	[1,3,2,5,4]	9		3
+//	[2,2,3,3]	10		4
+//	public int solution(int[] d, int budget) {
+//		int max = 0;
+//		for(int i=0; i<d.length; i++) {
+//			long n=0;
+//			int count=0;
+//			for(int j=0; j<d.length; j++) {
+//				if(i!=j) {
+//					n+=d[j];
+//					System.out.println(n);
+//					if(budget>=n) {
+//						count+=1;
+//						max = max <= count ? count:max;
+//					}
+//					else break;
+//				}
+//			}
+//		}
+//        int answer = max;
+//        return answer;
+//    }
+	
+//	길이가 같은 배열 A, B 두개가 있습니다. 각 배열은 자연수로 이루어져 있습니다.
+//	배열 A, B에서 각각 한 개의 숫자를 뽑아 두 수를 곱합니다. 이러한 과정을 배열의 길이만큼 반복하며, 두 수를 곱한 값을 누적하여 더합니다. 이때 최종적으로 누적된 값이 최소가 되도록 만드는 것이 목표입니다. (단, 각 배열에서 k번째 숫자를 뽑았다면 다음에 k번째 숫자는 다시 뽑을 수 없습니다.)
+//	A			B			answer
+//	[1, 4, 2]	[5, 4, 4]	29
+//	[1,2]		[3,4]		10
+
+	public int solution(int []A, int []B){
+        int answer = 0;
+        int min = 0;
+        for(int i=0; i<A.length && i<B.length; i++) {
+        	for(int j=0; j<A.length && i<B.length; j++) {
+        		min += A[i]*B[j] < min ? A[i]*B[i] : min;
+        	}
+        	System.out.println(min);
+        }
         return answer;
     }
 	
-
+//	[PCCP 모의고사 #1] 외톨이 알파벳
+//	input_string	result
+//	"edeaaabbccd"	"de"
+//	"eeddee"		"e"
+//	"string"		"N"
+//	"zbzbz"			"bz"
+	public String solution(String input_string) {
+		String answer = input_string;
+		char[] arr = input_string.toCharArray();
+		
+		for(int i=0; i<arr.length; i++) {
+			if(i>0) {
+				char before = input_string.charAt(i-1);
+//				before = before == arr[i]? before:arr[i];
+				if(before == arr[i])
+					answer = answer.replace(String.valueOf(arr[i]),"");
+			}
+		}
+		if(answer.length() == input_string.length())
+			answer = "N";
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for(char c : answer.toCharArray()) {
+			map.put(String.valueOf(c), 0);
+		}
+		if(map.keySet().toArray().length > 0)
+			answer = Arrays.toString(map.keySet().toArray()).replaceAll("[^a-z]", "");
+        return answer;
+    }
 	
+//	문자열 한글 철자 추출
+//	한글(유니코드) =>(초성*21+중성)*28+종성+0xAC00
+//	초성(유니코드) =>((문자유니코드 - 0xAC00)/28)/21
+//	중성(유니코드) =>(문자유니코드- 0xAC00)/28 % 21
+//	종성(유니코드) =>(문자유니코드 -0xAC00)%28
+	public void StringCheck() {
+		Scanner sc = new Scanner(System.in);
+		String s = sc.next();
+		System.out.println(s);
+		int count = 0;
+		StringBuffer sb = new StringBuffer();
+		System.out.println(sb.toString());
+		
+		System.out.println("hashCode:\t"+s.hashCode());
+		for(char c : s.toCharArray()) {
+			char unival = c;
+			String[] start = {"ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
+			String[] mid = {"ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"};
+			String[] end = {"","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
+			System.out.println(count+"글자:\t"+unival);
+//			System.out.println("초성:\t"+((int)(char)(unival-0xAC00)/28/21));
+//			System.out.println("중성:\t"+(int)(char)((unival-0xAC00)/28 % 21));
+//			System.out.println("종성:\t"+(int)(char)((unival-0xAC00)%28));
+			
+			System.out.println("초성:\t"+start[((int)(char)(unival-0xAC00)/28/21)]+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28/21));
+			System.out.println("중성:\t"+mid[(int)(char)((unival-0xAC00)/28 % 21)]+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28 % 21));
+			System.out.println("종성:\t"+end[(int)(char)((unival-0xAC00)%28)]+"\t 유니코드:\t"+(int)(char)(unival-0xAC00)%28);
+			
+//			System.out.println("초성:\t"+(unival-0xAC00)/28/21+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28/21));
+//			System.out.println("중성:\t"+(unival-0xAC00)/28 % 21+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28 % 21));
+//			System.out.println("종성:\t"+(unival-0xAC00)%28+"\t 유니코드:\t"+(int)(char)(unival-0xAC00)%28);
+			count+=1;
+		}	
+	}
+	
+	
+	public static void main(String[] args) {
+		int[] a = {1,2};
+		int[] b = {3,4};	
+		
+		Solution solution = new Solution();
+//		int[] d = {1,3,2,5,4};
+//		int[] f = {2,2,3,3};
+//		System.out.println(solution.solution("string"));
+		
+//		System.out.println(Arrays.toString(solution.solution(2,5)));
+//		System.out.println(Arrays.toString(solution.solution(arr)));
+		
+		solution.StringCheck();
+		
+	}
 }
 
