@@ -1,6 +1,10 @@
 package codingTest;
 
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.Character.UnicodeBlock;
 import java.lang.reflect.Array;
+import java.nio.ByteBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -1222,86 +1226,157 @@ public class Solution{
 //	"3people unFollowed me"	"3people Unfollowed Me"
 //	"for the last week"		"For The Last Week"
 	
-	public String solution(String s) {
-//		String[] arr = s.split(" ");
-//		System.out.println();
-//		System.out.println(Arrays.toString(arr));
+//	public String solution(String s) {
+////		String[] arr = s.split(" ");
+////		System.out.println();
+////		System.out.println(Arrays.toString(arr));
+////		String answer = "";
+////		for(int i=0; i<arr.length; i++) {
+////			arr[i] = arr[i].toLowerCase();
+////			 answer += String.valueOf(arr[i].charAt(0)).toUpperCase()+arr[i].substring(1, arr[i].length());
+////			 if(i < arr.length-1)
+////				 answer += " ";
+////		}
 //		String answer = "";
+//		char[] arr = s.toCharArray();
+//		int idx = 0;
 //		for(int i=0; i<arr.length; i++) {
-//			arr[i] = arr[i].toLowerCase();
-//			 answer += String.valueOf(arr[i].charAt(0)).toUpperCase()+arr[i].substring(1, arr[i].length());
-//			 if(i < arr.length-1)
-//				 answer += " ";
+//			System.out.println(arr[i]);
+//			idx = " ".equals(String.valueOf(arr[i])) ? i+1: idx;
+//			if(idx == i)
+//				answer += String.valueOf(arr[i]).toUpperCase();
+//			else
+//				answer += String.valueOf(arr[i]).toLowerCase();
 //		}
-		String answer = "";
+//		
+//		
+//        return answer;
+//    }
+	
+//	public int solution(int []A, int []B){
+//        int answer = 0;
+//        ArrayList<Integer> answers = new ArrayList<Integer>();
+//        System.out.println(Arrays.toString(A));
+//        System.out.println(Arrays.toString(B));
+//        for(int i=0; i<A.length&& i < B.length; i++) {
+//        	answer += A[i]*B[i];
+//        }
+//        
+//        return answer;
+//    }
+	
+	boolean solution(String s) {
+
+		int a = 0;
+		int b = 0;
+        
 		char[] arr = s.toCharArray();
-		int idx = 0;
-		for(int i=0; i<arr.length; i++) {
-			System.out.println(arr[i]);
-			idx = " ".equals(String.valueOf(arr[i])) ? i+1: idx;
-			if(idx == i)
-				answer += String.valueOf(arr[i]).toUpperCase();
-			else
-				answer += String.valueOf(arr[i]).toLowerCase();
-		}
+        int i = 0;
+        for(char c : arr) {
+        	if(c == '(') {
+        		i+=1;
+        	}else {
+        		i-=1;
+        	}
+        }
 		
-		
+        boolean answer = 0 == 0 ? true : false; 
         return answer;
     }
-	
-	public static void main(String[] args) {
-//		직사각형 별찍기
+//	직사각형 별찍기
+//	public static void main(String[] args) {
 //		Scanner sc = new Scanner(System.in);
-//        int a = sc.nextInt();
-//        int b = sc.nextInt();
-//        for(int i=0; i<b; i++) {
-//        	for(int j=0; j<a; j++) {
-//        		System.out.print("*");
-//        		if(j== a-1)
-//        			System.out.print("\n");
-//        	}
-//        }
-        
-//		행렬의 덧셈(미완료)
-		int[][] arr1 = {{1,2},{2,3}};
-		int[][] arr2 = {{3,4},{5,6}};
-		
-//		같은 숫자는 싫어(미완료)
-		int[] arr = {1,1,3,3,0,1,1};
-		
-		String s = 	"a aa ";
-		
-		Solution solution = new Solution();
-		System.out.println(solution.solution(s));
-		
-	}
-
+//      int a = sc.nextInt();
+//      int b = sc.nextInt();
+//      for(int i=0; i<b; i++) {
+//      	for(int j=0; j<a; j++) {
+//      		System.out.print("*");
+//      		if(j== a-1)
+//      			System.out.print("\n");
+//      	}
+//      }
+//	}
+	
 //	행렬의 덧셈 (미완료)
 //	행렬의 덧셈은 행과 열의 크기가 같은 두 행렬의 같은 행, 같은 열의 값을 서로 더한 결과가 됩니다.
 //	2개의 행렬 arr1과 arr2를 입력받아, 행렬 덧셈의 결과를 반환하는 함수, solution을 완성해주세요.
 //	arr1			arr2			return
 //	[[1,2],[2,3]]	[[3,4],[5,6]]	[[4,6],[7,9]]
 //	[[1],[2]]		[[3],[4]]		[[4],[6]]
-	public int[][] solution(int[][] arr1, int[][] arr2) {
-        
-    	for(int i=0; i<arr1.length; i++) {
-        	for(int j=0; j<arr1[i].length; j++) {
-        		System.out.println(arr1[i][j]+arr2[i][j]);
-        	}
-        }
-    	int[][] answer = new int[arr1.length][];
-        for(int[] i : arr1) {
-        	for(int j : i) {
-        		System.out.println(j);
-        	}
-        }
-        for(int[] i : arr2) {
-        	for(int j : i) {
-        		System.out.println(j);
-        	}
-        }
-        return answer;
-    }
+//	public int[][] solution(int[][] arr1, int[][] arr2) {
+//		int[][] answer = new int[arr1.length][arr1[0].length];
+//    	for(int i=0; i<arr1.length&& i<arr2.length; i++ ) {
+//    		for(int j=0; j<arr1[i].length && j<arr2[i].length;j++) {
+//    			answer[i][j] = arr1[i][j]+arr2[i][j];
+//    		}
+//    	}
+//        return answer;
+//    }
+	
+
+//	같은 숫자는 싫어 (완료: 스택)
+//	arr				answer
+//	[1,1,3,3,0,1,1]	[1,3,0,1]
+//	[4,4,4,3,3]		[4,3]
+//	public int[] solution(int []arr) {
+////		System.out.println(Arrays.toString(arr));
+//		Stack<Integer> st = new Stack<Integer>();
+//		for(int i : arr) {
+//			if(st.isEmpty()) st.push(i);	// 비었을 때 push
+//			else if(st.peek() != i) st.push(i);	// 맨앞에 저장된 값과 비교 후 push
+//		}
+////		System.out.println(st.toString());
+////		System.out.println("size:\t"+st.size());
+//		int[] answer = new int[st.size()];
+//		for(int i=answer.length-1; i>=0; i--) {
+//			answer[i] = st.pop();
+//		}
+//        return answer;
+//    }
+	
+//	문자열 한글 철자 추출
+//	한글(유니코드) =>(초성*21+중성)*28+종성+0xAC00
+//	초성(유니코드) =>((문자유니코드 - 0xAC00)/28)/21
+//	중성(유니코드) =>(문자유니코드- 0xAC00)/28 % 21
+//	종성(유니코드) =>(문자유니코드 -0xAC00)%28
+//	public void StringCheck() {
+//		Scanner sc = new Scanner(System.in);
+//		String s = sc.next();
+//		System.out.println(s);
+//		int count = 0;
+//		StringBuffer sb = new StringBuffer();
+//		System.out.println(sb.toString());
+//	
+//		for(char c : s.toCharArray()) {
+//			char unival = c;
+//			String[] start = {"ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
+//			String[] mid = {"ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"};
+//			String[] end = {"","ㄱ","ㄲ","ㄳ","ㄴ","ㄵ","ㄶ","ㄷ","ㄹ","ㄺ","ㄻ","ㄼ","ㄽ","ㄾ","ㄿ","ㅀ","ㅁ","ㅂ","ㅄ","ㅅ","ㅆ","ㅇ","ㅈ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
+//			System.out.println(count+"글자:\t"+unival);
+//			System.out.println("초성:\t"+start[((int)(char)(unival-0xAC00)/28/21)]+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28/21));
+//			System.out.println("중성:\t"+mid[(int)(char)((unival-0xAC00)/28 % 21)]+"\t 유니코드:\t"+(int)(char)((unival-0xAC00)/28 % 21));
+//			System.out.println("종성:\t"+end[(int)(char)((unival-0xAC00)%28)]+"\t 유니코드:\t"+(int)(char)(unival-0xAC00)%28);
+//			count+=1;
+//		}	
+//	}
+	
+	public static void main(String[] args) {
+		
+		String s = 	"a aa ";
+		
+		int[] a = {1, 4, 2};
+		int[] b = {5, 4, 4};	
+		
+		Solution solution = new Solution();
+//		System.out.println(solution.solution("(())()"));
+//		System.out.println(Arrays.toString(solution.solution(arr)));
+//		System.out.println("잘동작");
+		
+//		solution.StringCheck();
+		
+	}
+
+
 	
 	
 //	최대 공약수 , 최소 공배수
@@ -1335,22 +1410,7 @@ public class Solution{
         return answer;
     }
 	
-//	같은 숫자는 싫어
-	public int[] solution(int []arr) {
-        Queue<Integer> que = new LinkedList<Integer>();
-        // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-        for(int i : arr) {
-        	int j = que.size() > 0 ? que.peek(): 0;
-        	if(j != i)
-        		que.add(i);
-        }
-        
-        int[] answer = new int[que.size()];
-        for(int i=0; i<answer.length; i++) {
-        	answer[i] = que.poll();
-        }
-        return answer;
-    }
-	//test
+
+	
 }
 
