@@ -1,6 +1,7 @@
 package codingTest;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.lang.Character.UnicodeBlock;
 import java.lang.reflect.Array;
@@ -521,15 +522,13 @@ public class Solution{
 //	초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.
 //	public int[] solution(int[] prices) {
 //        int[] answer = {};
-//        
-//        i = Integer.parseInt(String.valueOf(i).charAt(String.valueOf(i).length()-1));
-//        System.out.println(Integer.parseInt(i));
-        
+////        i = Integer.parseInt(String.valueOf(i).charAt(String.valueOf(i).length()-1));
+////        System.out.println(Integer.parseInt(i));
 //        System.out.println(Arrays.toString(prices));
 //        for(int i=0; i<prices.length; i++) {
-//        	for(int j=i; j+1<prices.length; j++) {
+//        	for(int j=i; j<prices.length-1; j++) {
 //        		if(prices[i] <= prices[j+1]) {
-////        			answer[i] = prices.length-j;
+//        			answer[i] = prices.length-j;
 //        			System.out.println(prices.length-j);
 //        			break;
 //        		}
@@ -1416,28 +1415,28 @@ public class Solution{
 //	"eeddee"		"e"
 //	"string"		"N"
 //	"zbzbz"			"bz"
-	public String solution(String input_string) {
-		String answer = input_string;
-		char[] arr = input_string.toCharArray();
-		
-		for(int i=0; i<arr.length; i++) {
-			if(i>0) {
-				char before = input_string.charAt(i-1);
-//				before = before == arr[i]? before:arr[i];
-				if(before == arr[i])
-					answer = answer.replace(String.valueOf(arr[i]),"");
-			}
-		}
-		if(answer.length() == input_string.length())
-			answer = "N";
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		for(char c : answer.toCharArray()) {
-			map.put(String.valueOf(c), 0);
-		}
-		if(map.keySet().toArray().length > 0)
-			answer = Arrays.toString(map.keySet().toArray()).replaceAll("[^a-z]", "");
-        return answer;
-    }
+//	public String solution(String input_string) {
+//		String answer = input_string;
+//		char[] arr = input_string.toCharArray();
+//		
+//		for(int i=0; i<arr.length; i++) {
+//			if(i>0) {
+//				char before = input_string.charAt(i-1);
+////				before = before == arr[i]? before:arr[i];
+//				if(before == arr[i])
+//					answer = answer.replace(String.valueOf(arr[i]),"");
+//			}
+//		}
+//		if(answer.length() == input_string.length())
+//			answer = "N";
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		for(char c : answer.toCharArray()) {
+//			map.put(String.valueOf(c), 0);
+//		}
+//		if(map.keySet().toArray().length > 0)
+//			answer = Arrays.toString(map.keySet().toArray()).replaceAll("[^a-z]", "");
+//        return answer;
+//    }
 	
 //	문자열 한글 철자 추출
 //	한글(유니코드) =>(초성*21+중성)*28+종성+0xAC00
@@ -1474,21 +1473,274 @@ public class Solution{
 		}	
 	}
 	
+// 스킬 체크 level2
+//	높이	폭
+//	m	n	board															answer
+//	4	5	["CCBDE", "AAADE", "AAABF", "CCBBF"]							14
+//	6	6	["TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"]	15
+//	입력으로 판의 높이 m, 폭 n과 판의 배치 정보 board가 들어온다.
+//	board는 길이 n인 문자열 m개의 배열로 주어진다. 블록을 나타내는 문자는 대문자 A에서 Z가 사용된다.
+//	블라인드 공채를 통과한 신입 사원 라이언은 신규 게임 개발 업무를 맡게 되었다. 이번에 출시할 게임 제목은 "프렌즈4블록".
+//	같은 모양의 카카오프렌즈 블록이 2×2 형태로 4개가 붙어있을 경우 사라지면서 점수를 얻는 게임이다.
+	static boolean v[][];   // 체크 배열
+
+    public int solution(int m, int n, String[] board) {
+        int answer = 0;
+        // String 배열은 변경이 어려움. char 배열로 복사해서 사용
+        char copy[][] = new char[m][n]; 
+        for(int i=0; i<m ; i++){
+            copy[i] = board[i].toCharArray();
+        }
+        
+        boolean flag = true;
+        while(flag){
+             v = new boolean[m][n];
+            flag = false;
+            for(int i=0; i<m-1; i++){
+                for(int j=0; j<n-1; j++){
+                    if(copy[i][j] == '#') continue; // #은 빈칸을 의미
+                    if(check(i,j,copy)){    // 2*2 체크
+                        v[i][j] = true;
+                        v[i][j+1] = true;
+                        v[i+1][j] = true;
+                        v[i+1][j+1] = true;
+                        flag = true;
+                    }
+                }
+            }
+            answer += erase(m,n,copy);
+            v = new boolean[m][n];
+        }
+        return answer;
+    }
+    
+    /* 2*2가 같은지 체크 */
+    public static boolean check(int x, int y, char[][] board){
+        char ch = board[x][y];
+        if(ch == board[x][y+1] && ch== board[x+1][y] && ch == board[x+1][y+1]){
+            return true;
+        }
+        return false;
+    }
+    
+    /* 같은 블록 제거 */
+    public static int erase(int m, int n, char[][] board){
+        int cnt = 0;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(v[i][j]) 
+                    board[i][j] = '.';
+            }
+        }
+        
+        /* 큐를 이용해 세로로 제거 작업 진행 */
+        for(int i=0; i<n; i++){
+            Queue<Character> q = new LinkedList<>();
+            for(int j=m-1; j>=0; j--){
+                if(board[j][i] == '.'){ 
+                    cnt++;  // 지우는 블록 카운트
+                }else{
+                    q.add(board[j][i]);
+                }
+            }
+            int idx=m-1;
+            // 삭제한 블록 위의 블록들 내리기
+            while(!q.isEmpty()){
+                board[idx--][i] = q.poll();
+            }
+            // 빈칸 채우기
+            for(int j=idx; j>=0; j--){
+                board[j][i] = '#';
+            }
+        }
+ 
+        return cnt;
+    }
+	
+//	public int solution(int m, int n, String[] board) {
+//		String[][] freinds4 = new String[m][n];
+//        for(int i=m-1; i>=0; i--) {
+//        	for(int j=0; j<n; j++) {
+//        		freinds4[i][j] = String.valueOf(board[i].charAt(j));
+//        	}
+//        }
+//        for(int i=m-1; i>=0; i--) {
+//        	for(int j=0; j<n; j++) {
+//        		System.out.print(freinds4[i][j]);
+//        	}
+//        	System.out.print("\n");
+//        }
+//        int answer = 0;
+//        return answer;
+//    }
+//	public int solution(int m, int n, String[] board) {
+//		String str = "";
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		for(int i=0; i<m; i++) {
+//			map.put(String.valueOf(i), Arrays.toString(board[i].chars().toArray()));
+//		}
+//        System.out.println(map.toString());
+//        int answer = 0;
+//        return answer;
+//    }
+	
+//    초 단위로 기록된 주식가격이 담긴 배열 prices가 매개변수로 주어질 때, 가격이 떨어지지 않은 기간은 몇 초인지를 return 하도록 solution 함수를 완성하세요.
+//    prices			return
+//    [1, 2, 3, 2, 3]	[4, 3, 1, 1, 0]
+    public int[] solution(int[] prices) {
+        int[] answer = new int[prices.length];
+        for(int i=0; i<prices.length; i++) {
+    		for(int j=i; j<prices.length; j++) {
+    			System.out.println();
+//    			if(prices[i]<prices[j]) {
+//    				answer[i] = j-i;
+//    			}else {
+//    				answer[i] = i<prices.length-1? prices.length-j : 0; 
+//    			}
+    		}
+        }
+        return answer;
+    }
+	
+    public Object fnParser(Object obj) {
+    	
+    	System.out.println(obj.getClass() == Integer.class);
+    	System.out.println(obj.getClass() == String.class);
+    	System.out.println(obj.getClass() == Double.class);
+    	System.out.println(obj.getClass() == Float.class);
+    	System.out.println(obj.getClass() == Arrays.class);
+    	System.out.println(obj.getClass() == ArrayList.class);
+    	System.out.println(obj.getClass() == String[].class);
+    	System.out.println(obj.getClass() == int[].class);
+    	System.out.println(Arrays.toString(String.class.getMethods()));
+    	System.out.println(obj.hashCode());
+    	System.out.println("1".hashCode() == obj.hashCode());
+    	
+    	System.out.println();
+    	
+    	return obj;
+    }
+    
+    public Object masking(Object obj) {
+    	System.out.println(obj);
+    	String s = (String)obj;
+    	s = s.replaceAll("[0-9]", "*");
+    	s = s.replaceAll("하나|둘|셋|넷|다섯|여섯|일곱|여덟|아홉|열","*");
+    	s = s.replaceAll("일|이|삼|사|도|육|칠|팔|구|십","*");
+    	s = s.replaceAll("","");
+    	
+//    	System.out.println(s.matches("(.*)[0-9](.*)"));
+//    	System.out.println(s.matches("[0-9]"));
+    	
+    	System.out.println(s);
+    	return obj;
+	}
+    
+//    괄호 체크
+    public Object checkString(
+//    		Object obj
+    		) {
+    	Scanner scan = new Scanner(System.in);
+        String str = scan.next();
+        char[] stack = new char[str.length()];
+        int top = -1;
+        for(int i = 0; i < str.length(); i++){
+            char c = str.charAt(i);
+            if(c == '}') {
+                if(stack[top] == '{'){
+                    top--;
+                }else {
+                    System.out.println("NO");
+                    break;
+                }
+            }
+
+            if(c == ']') {
+                if(stack[top] == '['){
+                    top--;
+                }else {
+                    System.out.println("NO");
+                    break;
+                }
+            }
+
+            if(c == ')') {
+                if(stack[top] == '('){
+                    top--;
+                }else {
+                    System.out.println("NO");
+                    break;
+                }
+            }
+            if((c == '(') || (c == '[') || (c == '{')){
+                stack[++top] = c;
+            }
+        }
+        if(top == -1){
+            System.out.println("YES");
+        }
+        return "";
+	}
 	
 	public static void main(String[] args) {
-		int[] a = {1,2};
+		int[] a = {1, 2, 3, 2, 3};
 		int[] b = {3,4};	
 		
 		Solution solution = new Solution();
 //		int[] d = {1,3,2,5,4};
 //		int[] f = {2,2,3,3};
-//		System.out.println(solution.solution("string"));
+		
+//		String[] arr = {"CCBDE", "AAADE", "AAABF", "CCBBF"};
+//		System.out.println(Arrays.toString(solution.solution(a)));
+		
+//		solution.fnParser("123457567");
+//		solution.masking("1하나안2둘녕3셋하4넷세5다섯요6여섯7일곱8여덟9아홉10열");
+		
+		System.out.println(solution.solution("((()(())()))"));
+		
+//		solution.checkString();
 		
 //		System.out.println(Arrays.toString(solution.solution(2,5)));
 //		System.out.println(Arrays.toString(solution.solution(arr)));
 		
-		solution.StringCheck();
-		
+//		solution.StringCheck();
 	}
-}
 
+	// 괄호 검사
+	private Object check(Object obj) {
+		String s = obj.toString();
+		char[] cArr = s.toCharArray();
+		for(int i=0; i<cArr.length; i++) {
+			char c = cArr[i];
+			if(String.valueOf(c).equals(")")) {
+				for(int j=i; j>=0; j--) {
+					if(String.valueOf(cArr[j]).equals("(")) {
+						cArr[i] = '0';
+						cArr[j] = '0';
+						break;
+					}
+				}
+				continue;
+			}
+		}
+		return String.valueOf(cArr).replaceAll("0", "").length() > 0 ? false : true;
+	}
+	
+	boolean solution(String s) {
+		boolean answer = true;
+		Stack<Character> stack = new Stack<Character>();
+		for(int i=0; i<s.length(); i++) {
+			if(s.charAt(i) == '(') {
+				stack.push(s.charAt(i));
+			}else {
+				if(!stack.isEmpty()) {
+					stack.pop();
+				}else {
+					answer = false;
+					break;
+				}
+			}
+		}
+		return answer;
+    }
+}
